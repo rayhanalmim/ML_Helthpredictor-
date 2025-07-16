@@ -106,14 +106,36 @@ class HealthVisualizations:
         
         # Highlight anomalies if any
         if anomalies['has_anomalies']:
-            # This is a simplified version - in practice you'd extract anomaly points
-            fig.add_trace(go.Scatter(
-                x=[data['timestamp'].iloc[-1]],
-                y=[data['heart_rate'].iloc[-1]],
-                mode='markers',
-                name='Anomaly',
-                marker=dict(color=self.color_palette['danger'], size=12)
-            ))
+            # Extract anomaly timestamps
+            anomaly_timestamps = []
+            anomaly_heart_rates = []
+            
+            for idx, row in data.iterrows():
+                # Check if this timestamp has an anomaly
+                for anomaly in anomalies['anomaly_details']:
+                    if 'affected_vitals' in anomaly and 'heart_rate' in anomaly['affected_vitals']:
+                        anomaly_timestamps.append(idx)
+                        anomaly_heart_rates.append(row['heart_rate'])
+                        break
+            
+            # Add anomaly points if any were found
+            if anomaly_timestamps:
+                fig.add_trace(go.Scatter(
+                    x=anomaly_timestamps,
+                    y=anomaly_heart_rates,
+                    mode='markers',
+                    name='Anomaly',
+                    marker=dict(color=self.color_palette['danger'], size=12)
+                ))
+            # If no specific heart rate anomalies, just mark the last point
+            else:
+                fig.add_trace(go.Scatter(
+                    x=[data['timestamp'].iloc[-1]],
+                    y=[data['heart_rate'].iloc[-1]],
+                    mode='markers',
+                    name='Anomaly',
+                    marker=dict(color=self.color_palette['danger'], size=12)
+                ))
         
         fig.update_layout(
             title="Health Data with Anomaly Detection",

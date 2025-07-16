@@ -479,8 +479,18 @@ class HealthMonitoringApp:
             st.error("⚠️ **Anomalies Detected!**")
             
             for anomaly in anomalies['anomaly_details']:
-                st.warning(f"**{anomaly['metric']}**: {anomaly['description']}")
-                st.write(f"Value: {anomaly['value']}, Normal range: {anomaly['normal_range']}")
+                # Display affected vitals and severity
+                if 'affected_vitals' in anomaly and anomaly['affected_vitals']:
+                    for vital in anomaly['affected_vitals'][:2]:  # Show up to 2 vitals
+                        st.warning(f"**{vital}**: {anomaly['severity']} severity")
+                    
+                    # Display recommendations if available
+                    if 'recommendations' in anomaly and anomaly['recommendations']:
+                        st.write("**Recommendations:**")
+                        for rec in anomaly['recommendations'][:3]:  # Show top 3 recommendations
+                            st.write(f"- {rec}")
+                else:
+                    st.warning(f"**Anomaly detected**: {anomaly.get('severity', 'unknown')} severity")
         else:
             st.success("✅ No anomalies detected in your health data.")
         
@@ -659,7 +669,12 @@ class HealthMonitoringApp:
             if anomalies['has_anomalies']:
                 st.error("⚠️ **Health Anomalies Detected!**")
                 for anomaly in anomalies['anomaly_details'][:3]:  # Show top 3
-                    st.warning(f"- {anomaly['metric']}: {anomaly['description']}")
+                    # Display the affected vitals and severity
+                    if anomaly['affected_vitals']:
+                        for vital in anomaly['affected_vitals'][:2]:  # Show up to 2 vitals
+                            st.warning(f"- {vital}: {anomaly['severity']} severity")
+                    else:
+                        st.warning(f"- Anomaly detected: {anomaly['severity']} severity")
 
 # Run the application
 if __name__ == "__main__":

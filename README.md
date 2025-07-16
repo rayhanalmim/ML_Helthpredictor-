@@ -51,24 +51,55 @@ health-monitoring-system/
 
 ## 🚀 Quick Start
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd health-monitoring-system
-   ```
+### 1. Clone the repository
+```bash
+git clone https://github.com/yourusername/health-monitoring-system.git
+cd health-monitoring-system
+```
 
-2. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+### 2. Set up a virtual environment
 
-3. **Run the application**
-   ```bash
-   streamlit run app/main.py
-   ```
+#### For Windows:
+```bash
+# Create virtual environment
+python -m venv tf_env
 
-4. **Access the application**
-   Open your browser and navigate to `http://localhost:8501`
+# Activate the environment
+# Using Command Prompt
+tf_env\Scripts\activate
+
+# Using Git Bash
+source ./tf_env/Scripts/activate
+
+# Using PowerShell
+.\tf_env\Scripts\Activate.ps1
+```
+
+#### For MacOS/Linux:
+```bash
+# Create virtual environment
+python3 -m venv tf_env
+
+# Activate the environment
+source tf_env/bin/activate
+```
+
+### 3. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run the application
+```bash
+# Using Streamlit
+python -m streamlit run app/main.py
+
+# OR
+streamlit run app/main.py
+```
+
+### 5. Access the application
+Open your browser and navigate to `http://localhost:8501`
 
 ## 📊 Datasets Used
 

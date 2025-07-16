@@ -8,17 +8,20 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 import nltk
+nltk.data.path = ['./nltk_data'] + nltk.data.path  # Prioritize local directory
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 import warnings
 warnings.filterwarnings('ignore')
 
-# Download required NLTK data
+# Add robust NLTK configuration
+import nltk
+nltk.data.path = ['./nltk_data'] + nltk.data.path
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
-    nltk.download('punkt', quiet=True)
+    nltk.download('punkt', download_dir='./nltk_data', quiet=True)
 
 try:
     nltk.data.find('corpora/stopwords')
