@@ -16,8 +16,8 @@ lightgbm>=3.3.0
 catboost>=1.2.0
 
 # Time Series Analysis
-statsmodels>=0.14.0
-pmdarima>=2.0.0
+# statsmodels>=0.14.0  # Temporarily commented out due to build errors on Python 3.13.5. Re-enable when compatibility is resolved.
+# pmdarima>=2.0.0  # Temporarily commented out due to build errors on Python 3.13.5. Re-enable when compatibility is resolved.
 
 # Natural Language Processing
 nltk>=3.8.0
