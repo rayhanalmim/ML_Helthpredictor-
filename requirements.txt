@@ -34,7 +34,7 @@ altair==5.0.1
 
 # Web Framework and UI
 streamlit==1.27.2  # Downgraded for compatibility
-flask==2.3.3
+flask==2.2.5  # Downgraded to be compatible with Dash 2.13.0
 dash==2.13.0
 
 # Database
